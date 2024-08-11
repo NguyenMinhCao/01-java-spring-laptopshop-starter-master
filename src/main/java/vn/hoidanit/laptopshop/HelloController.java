@@ -9,5 +9,4 @@ public class HelloController {
     public String index() {
         return "Hello world , cao dep trai, phan tom";
     }
-
 }
