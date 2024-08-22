@@ -19,9 +19,10 @@
                 <div class="container mt-5">
                     <div class="row">
                         <div class="col-md-6 col-12 mx-auto">
-                            <h3>Create User</h3>
+                            <h3>Update User</h3>
                             <hr>
-                            <form:form method="post" action="/admin/user/create-user" modelAttribute="newUser">
+                            <form:form method="post" action="/admin/user/updateId/${updateUser.id}"
+                                modelAttribute="updateUser">
                                 <div class="mb-3">
                                     <label class="form-label">Email:</label>
                                     <form:input type="email" class="form-control" path="email" />
