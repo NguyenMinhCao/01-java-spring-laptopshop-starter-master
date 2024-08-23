@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Password:</label>
-                                    <input type="password" class="form-control" path="passWord" />
+                                    <form:input type="password" class="form-control" path="password" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone number:</label>

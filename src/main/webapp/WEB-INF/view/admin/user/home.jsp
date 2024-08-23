@@ -38,10 +38,10 @@
                                     <td>${user.email}</td>
                                     <td>${user.fullName}</td>
                                     <td>
-                                        <a href="" class="btn btn-success">View</a>
+                                        <a href="/admin/user/user-detail/${user.id}" class="btn btn-success">View</a>
                                         <a href="/admin/user/view-updateId/${user.id}"
                                             class="btn btn-warning">Update</a>
-                                        <a href="/admin/user/deteleId/${user.id}" class="btn btn-danger">Delete</a>
+                                        <a href="/admin/user/view-deteleId/${user.id}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>

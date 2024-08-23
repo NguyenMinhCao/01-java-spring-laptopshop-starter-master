@@ -21,15 +21,18 @@
                         <div class="col-md-6 col-12 mx-auto">
                             <h3>Update User</h3>
                             <hr>
-                            <form:form method="post" action="/admin/user/updateId/${updateUser.id}"
-                                modelAttribute="updateUser">
+                            <form:form method="post" action="/admin/user/updateId" modelAttribute="updateUser">
+                                <div class="mb-3" style="display: none;">
+                                    <label class="form-label">Id:</label>
+                                    <form:input type="number" class="form-control" path="id" />
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email:</label>
-                                    <form:input type="email" class="form-control" path="email" />
+                                    <form:input type="email" class="form-control" path="email" disabled="true" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Password:</label>
-                                    <input type="password" class="form-control" path="passWord" />
+                                    <form:input type="password" class="form-control" path="password" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Phone number:</label>

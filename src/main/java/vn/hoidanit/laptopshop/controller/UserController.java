@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -23,6 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // user information list page
     @RequestMapping("/admin/user")
     public String getHomePage(Model model) {
         List<User> arrUser = this.userService.getAllUser();
@@ -30,6 +30,7 @@ public class UserController {
         return "/admin/user/home";
     }
 
+    // user creation page form
     @RequestMapping("/admin/user/create")
     public String getCreateUser(Model model) {
         model.addAttribute("newUser", new User());
@@ -37,9 +38,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/user/create-user", method = RequestMethod.POST)
-    public String createUser(Model model, @ModelAttribute("newUser") User user) {
+    public String createUser(@ModelAttribute("newUser") User user) {
         this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
+    }
+
+    // detele user by id
+    @RequestMapping(value = "/admin/user/view-deteleId/{id}")
+    public String viewDeteleUser(@PathVariable("id") Long id, Model model) {
+        Optional<User> getUserOp = this.userService.findByIDUser(id);
+        User getUser = getUserOp.get();
+        model.addAttribute("idUser", getUser.getId());
+        return "/admin/user/delete";
     }
 
     @RequestMapping(value = "/admin/user/deteleId/{id}")
@@ -48,6 +58,7 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
+    // page updates users by id
     @RequestMapping(value = "/admin/user/view-updateId/{id}")
     public String viewUpdateUser(Model model, @PathVariable("id") Long id) {
         Optional<User> userOptional = this.userService.findByIDUser(id);
@@ -56,11 +67,31 @@ public class UserController {
         return "/admin/user/update";
     }
 
-    @RequestMapping(value = "/admin/user/updateId/{id}", method = RequestMethod.POST)
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute User user) {
-        user.setId(id);
-        this.userService.handleSaveUser(user);
+    @RequestMapping(value = "/admin/user/updateId", method = RequestMethod.POST)
+    public String updateUser(@ModelAttribute("updateUser") User user) {
+        Optional<User> currentUser = this.userService.findByIDUser(user.getId());
+        User currentUserUnWrap = currentUser.get();
+        if (currentUserUnWrap != null) {
+            currentUserUnWrap.setFullName(user.getFullName());
+            currentUserUnWrap.setAddress(user.getAddress());
+            currentUserUnWrap.setPassword(user.getPassword());
+            currentUserUnWrap.setPhone(user.getPhone());
+            this.userService.handleSaveUser(currentUserUnWrap);
+        }
         return "redirect:/admin/user";
+    }
+
+    // page displays user details by id
+    @RequestMapping(value = "/admin/user/user-detail/{id}")
+    public String userDetail(@PathVariable("id") Long id, Model model) {
+        Optional<User> userOptional = this.userService.findByIDUser(id);
+        User user = userOptional.get();
+        model.addAttribute("userName", user.getFullName());
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("userAddress", user.getAddress());
+        model.addAttribute("userPhone", user.getPhone());
+        model.addAttribute("userPass", user.getPassword());
+        return "/admin/user/user-detail";
     }
 
 }
