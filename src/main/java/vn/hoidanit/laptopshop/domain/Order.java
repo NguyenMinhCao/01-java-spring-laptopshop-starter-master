@@ -16,27 +16,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String email;
-    private String password;
-    private String fullName;
-    private String address;
-    private String phone;
-    private String avatar;
+    private double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> order;
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails;
+
 }
