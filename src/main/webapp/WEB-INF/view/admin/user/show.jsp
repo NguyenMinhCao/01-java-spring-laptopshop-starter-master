@@ -32,19 +32,42 @@
                                 <h1 class="mt-4">Dashboard</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active">
-                                        <a href="/admin" style="text-decoration: none;">Dashboard</a> / Detele
+                                        <a href="/admin" style="text-decoration: none;">Dashboard</a> / User
                                     </li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="d-flex justify-content-between">
-                                        <h3>Delete user ${idUser}</h3>
+                                        <h3>Table user</h3>
+                                        <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
                                     </div>
                                     <hr>
-                                    <div class="alert alert-danger" role="alert">
-                                        Bạn muốn xóa User có ID là ${idUser} ??
-                                    </div>
-                                    <a href="/admin/user/deteleId/${idUser}" class="btn btn-success">Confirm</a>
-                                    <a style="margin-left: 10px;" class="btn btn-warning" href="/admin/user">Back</a>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${listUser}" var="user">
+                                                <tr>
+                                                    <th scope="row">${user.id}</th>
+                                                    <td>${user.email}</td>
+                                                    <td>${user.fullName}</td>
+                                                    <td>
+                                                        <a href="/admin/user/user-detail/${user.id}"
+                                                            class="btn btn-success">View</a>
+                                                        <a href="/admin/user/view-updateId/${user.id}"
+                                                            class="btn btn-warning">Update</a>
+                                                        <a href="/admin/user/view-deteleId/${user.id}"
+                                                            class="btn btn-danger">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </main>

@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +27,7 @@ public class UserController {
     public String getHomePage(Model model) {
         List<User> arrUser = this.userService.getAllUser();
         model.addAttribute("listUser", arrUser);
-        return "/admin/user/home";
+        return "/admin/user/show";
     }
 
     // user creation page form
@@ -91,7 +91,7 @@ public class UserController {
         model.addAttribute("userAddress", user.getAddress());
         model.addAttribute("userPhone", user.getPhone());
         model.addAttribute("userPass", user.getPassword());
-        return "/admin/user/user-detail";
+        return "/admin/user/detail";
     }
 
 }
