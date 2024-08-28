@@ -12,6 +12,17 @@
                 <meta name="author" content="" />
                 <title>Dashboard - SB Admin</title>
                 <link href="/css/styles.css" rel="stylesheet" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +43,7 @@
                                 <h1 class="mt-4">Dashboard</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active">
-                                        <a href="/admin" style="text-decoration: none;">Dashboard</a> / Update
+                                        <a href="/admin" style="text-decoration: none;">Dashboard</a> / Create
                                     </li>
                                 </ol>
                                 <div class="container mt-5">
@@ -40,36 +51,55 @@
                                         <div class="col-md-6 col-12 mx-auto">
                                             <h3>Update User</h3>
                                             <hr>
-                                            <form:form method="post" action="/admin/user/updateId"
-                                                modelAttribute="updateUser">
+                                            <form:form class="row g-3" method="post" action="/admin/user/updateId"
+                                                modelAttribute="updateUser" enctype="multipart/form-data">
                                                 <div class="mb-3" style="display: none;">
                                                     <label class="form-label">Id:</label>
                                                     <form:input type="number" class="form-control" path="id" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="col-md-6">
                                                     <label class="form-label">Email:</label>
                                                     <form:input type="email" class="form-control" path="email"
                                                         disabled="true" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="col-md-6">
                                                     <label class="form-label">Password:</label>
                                                     <form:input type="password" class="form-control" path="password" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="col-md-6">
                                                     <label class="form-label">Phone number:</label>
                                                     <form:input type="text" class="form-control" path="phone" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="col-md-6">
                                                     <label class="form-label">Full Name:</label>
                                                     <form:input type="text" class="form-control" path="fullName" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="col-md-12">
                                                     <label class="form-label">Address:</label>
                                                     <form:input type="text" class="form-control" path="address" />
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Create</button>
-                                                <a style="margin-left: 10px;" class="btn btn-warning"
-                                                    href="/admin/user">Back</a>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Role:</label>
+                                                    <form:select class="form-select" aria-label="Default select example"
+                                                        path="role.name">
+                                                        <form:option value="ADMIN">Admin</form:option>
+                                                        <form:option value="USER">User</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="formFile" class="form-label">Avatar:</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png , .jpg, .jpeg" name="getImgFile">
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                    <a style="margin-left: 10px;" class="btn btn-warning"
+                                                        href="/admin/user">Back</a>
+                                                </div>
                                             </form:form>
                                         </div>
                                     </div>
