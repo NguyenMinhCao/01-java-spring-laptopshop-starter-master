@@ -3,15 +3,13 @@ package vn.hoidanit.laptopshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import vn.hoidanit.laptopshop.domain.User;
@@ -33,7 +31,7 @@ public class UserController {
     }
 
     // user information list page
-    @RequestMapping("/admin/user")
+    @GetMapping("/admin/user")
     public String getHomePage(Model model) {
         List<User> arrUser = this.userService.getAllUser();
         model.addAttribute("listUser", arrUser);
@@ -41,7 +39,7 @@ public class UserController {
     }
 
     // user creation page form
-    @RequestMapping("/admin/user/create")
+    @GetMapping("/admin/user/create")
     public String getCreateUser(Model model) {
         model.addAttribute("newUser", new User());
         return "/admin/user/create";
@@ -61,7 +59,7 @@ public class UserController {
     }
 
     // detele user by id
-    @RequestMapping(value = "/admin/user/view-deteleId/{id}")
+    @GetMapping(value = "/admin/user/view-deteleId/{id}")
     public String viewDeteleUser(@PathVariable("id") Long id, Model model) {
         Optional<User> getUserOp = this.userService.findByIDUser(id);
         User getUser = getUserOp.get();
@@ -69,14 +67,14 @@ public class UserController {
         return "/admin/user/delete";
     }
 
-    @RequestMapping(value = "/admin/user/deteleId/{id}")
+    @GetMapping(value = "/admin/user/deteleId/{id}")
     public String deteleUser(@PathVariable("id") Long id) {
         this.userService.deleteByIdUser(id);
         return "redirect:/admin/user";
     }
 
     // page updates users by id
-    @RequestMapping(value = "/admin/user/view-updateId/{id}")
+    @GetMapping(value = "/admin/user/view-updateId/{id}")
     public String viewUpdateUser(Model model, @PathVariable("id") Long id) {
         Optional<User> userOptional = this.userService.findByIDUser(id);
         User user = userOptional.get();
@@ -84,7 +82,7 @@ public class UserController {
         return "/admin/user/update";
     }
 
-    @RequestMapping(value = "/admin/user/updateId", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/user/updateId")
     public String updateUser(@ModelAttribute("updateUser") User user,
             @RequestParam("getImgFile") MultipartFile file) {
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
@@ -103,7 +101,7 @@ public class UserController {
     }
 
     // page displays user details by id
-    @RequestMapping(value = "/admin/user/user-detail/{id}")
+    @GetMapping(value = "/admin/user/user-detail/{id}")
     public String userDetail(@PathVariable("id") Long id, Model model) {
         Optional<User> userOptional = this.userService.findByIDUser(id);
         User user = userOptional.get();
