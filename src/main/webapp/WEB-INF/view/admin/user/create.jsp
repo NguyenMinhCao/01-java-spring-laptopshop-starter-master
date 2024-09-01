@@ -56,6 +56,7 @@
                                                 <div class="col-md-6">
                                                     <label class="form-label">Email:</label>
                                                     <form:input type="email" class="form-control" path="email" />
+                                                    <form:errors path="email" />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Password:</label>

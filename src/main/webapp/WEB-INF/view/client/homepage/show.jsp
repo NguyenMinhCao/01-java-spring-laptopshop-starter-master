@@ -281,7 +281,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="tab-2" class="tab-pane fade show p-0">
+                                <!-- <div id="tab-2" class="tab-pane fade show p-0">
                                     <div class="row g-4">
                                         <div class="col-lg-12">
                                             <div class="row g-4">
@@ -519,7 +519,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
