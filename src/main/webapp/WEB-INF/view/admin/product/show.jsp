@@ -54,9 +54,9 @@
                                                 <td>
                                                     <a href="/admin/product/product-detail/${product.id}"
                                                         class="btn btn-success">View</a>
-                                                    <a href="/admin/user/product-updateId/${product.id}"
+                                                    <a href="/admin/product/product-updateId/${product.id}"
                                                         class="btn btn-warning">Update</a>
-                                                    <a href="/admin/user/product-deteleId/${product.id}"
+                                                    <a href="/admin/product/product-deteleId/${product.id}"
                                                         class="btn btn-danger">Delete</a>
                                                 </td>
                                             </tr>
