@@ -16,6 +16,12 @@
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
+                        const orgImage = "${updateProduct.image}";
+                        if (orgImage) {
+                            const urlImage = "/images/product/" + orgImage;
+                            $("#avatarPreview").attr("src", urlImage);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
@@ -43,17 +49,16 @@
                                 <h1 class="mt-4">Dashboard</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active">
-                                        <a href="/admin" style="text-decoration: none;">Dashboard</a> / Create
+                                        <a href="/admin" style="text-decoration: none;">Dashboard</a> / Update
                                     </li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create product</h3>
+                                            <h3>Update product</h3>
                                             <hr>
-                                            <form:form class="row g-3" method="post"
-                                                action="/admin/product/create-product" modelAttribute="newProduct"
-                                                enctype="multipart/form-data">
+                                            <form:form class="row g-3" method="post" action="/admin/product/update"
+                                                modelAttribute="updateProduct" enctype="multipart/form-data">
                                                 <c:set var="errorName">
                                                     <form:errors path="name" cssClass="invalid-feedback" />
                                                 </c:set>
@@ -69,6 +74,10 @@
                                                 <c:set var="errorQuantity">
                                                     <form:errors path="quantity" cssClass="invalid-feedback" />
                                                 </c:set>
+                                                <div class="col-md-6" style="display: none;">
+                                                    <label class="form-label">Id:</label>
+                                                    <form:input type="text" class="form-control" path="id" />
+                                                </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Name:</label>
                                                     <form:input type="text"
@@ -95,7 +104,7 @@
                                                     <form:input type="text"
                                                         class="form-control ${not empty errorShortDesc ? 'is-invalid':''}"
                                                         path="shortDesc" />
-                                                    ${errorShortDesc}
+                                                    ${errorShortDesc} 
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label class="form-label">Quantity:</label>
@@ -104,6 +113,7 @@
                                                         path="quantity" />
                                                     ${errorQuantity}
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <label class="form-label">Factory:</label>
                                                     <form:select class="form-select" aria-label="Default select example"
@@ -139,7 +149,7 @@
                                                         id="avatarPreview">
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
                                                     <a style="margin-left: 10px;" class="btn btn-warning"
                                                         href="/admin/product">Back</a>
                                                 </div>

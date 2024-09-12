@@ -3,7 +3,6 @@ package vn.hoidanit.laptopshop.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.eclipse.tags.shaded.org.apache.regexp.recompile;
 import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Product;
@@ -18,14 +17,18 @@ public class ProductService {
     }
 
     public List<Product> getAllProduct() {
-        return productRepository.findAll();
+        return this.productRepository.findAll();
     }
 
     public Product handleSaveProduct(Product product) {
-        return productRepository.save(product);
+        return this.productRepository.save(product);
     }
 
     public Optional<Product> findByIdProduct(Long id) {
-        return productRepository.findById(id);
+        return this.productRepository.findById(id);
+    }
+
+    public void deteleProductById(Long id) {
+        this.productRepository.deleteById(id);
     }
 }

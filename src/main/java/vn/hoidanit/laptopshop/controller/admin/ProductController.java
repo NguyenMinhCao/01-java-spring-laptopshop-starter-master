@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ProductController {
@@ -56,7 +57,7 @@ public class ProductController {
         return "redirect:/admin/product";
     }
 
-    @GetMapping("/admin/product/product-detail/{id}")
+    @GetMapping("/admin/product/detail/{id}")
     public String getDetailProduct(@PathVariable("id") Long id, Model model) {
         Optional<Product> getProduct = productService.findByIdProduct(id);
         Product productUnwrap = getProduct.get();
@@ -65,6 +66,56 @@ public class ProductController {
         model.addAttribute("namePro", productUnwrap.getName());
         model.addAttribute("pricePro", productUnwrap.getPrice());
         return "/admin/product/detail";
+    }
+
+    @GetMapping("/admin/product/view-update/{id}")
+    public String viewUpdateProduct(@PathVariable("id") Long id, Model model) {
+        Optional<Product> getProduct = productService.findByIdProduct(id);
+        Product productUnwrap = getProduct.get();
+        model.addAttribute("updateProduct", productUnwrap);
+        return "/admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update")
+    public String updateProduct(
+            @ModelAttribute("updateProduct") @Valid Product product,
+            BindingResult updateProdBindingResult,
+            @RequestParam("getImgFile") MultipartFile file) {
+        if (updateProdBindingResult.hasErrors()) {
+            return "/admin/product/update";
+        }
+        String avatar = this.uploadService.handleSaveUploadFile(file, "product");
+        Optional<Product> currentProduct = this.productService.findByIdProduct(product.getId());
+        Product currentProductUnWrap = currentProduct.get();
+        if (currentProductUnWrap != null) {
+            currentProductUnWrap.setName(product.getName());
+            currentProductUnWrap.setPrice(product.getPrice());
+            currentProductUnWrap.setDetailDesc(product.getDetailDesc());
+            currentProductUnWrap.setShortDesc(product.getShortDesc());
+            currentProductUnWrap.setQuantity(product.getQuantity());
+            currentProductUnWrap.setFactory(product.getFactory());
+            currentProductUnWrap.setTarget(product.getTarget());
+            if (!avatar.isEmpty()) {
+                currentProductUnWrap.setImage(avatar);
+            }
+            this.productService.handleSaveProduct(currentProductUnWrap);
+        }
+        return "redirect:/admin/product";
+    }
+
+    @GetMapping("/admin/product/view-detele/{id}")
+    public String viewDeleteProduct(@PathVariable("id") Long id, Model model) {
+        Optional<Product> currentProduct = this.productService.findByIdProduct(id);
+        Product currentProductUnWrap = currentProduct.get();
+        model.addAttribute("idProduct", currentProductUnWrap.getId());
+        model.addAttribute("nameProduct", currentProductUnWrap.getName());
+        return "/admin/product/delete";
+    }
+
+    @GetMapping("/admin/product/detele/{id}")
+    public String deteleProduct(@PathVariable("id") long id) {
+        this.productService.deteleProductById(id);
+        return "redirect:/admin/product";
     }
 
 }
