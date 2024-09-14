@@ -109,7 +109,9 @@ public class UserController {
             currentUserUnWrap.setPassword(user.getPassword());
             currentUserUnWrap.setPhone(user.getPhone());
             currentUserUnWrap.setRole(this.userService.getRoleByName(user.getRole().getName()));
-            currentUserUnWrap.setAvatar(avatar);
+            if (!avatar.isEmpty()) {
+                currentUserUnWrap.setAvatar(avatar);
+            }
             this.userService.handleSaveUser(currentUserUnWrap);
         }
         return "redirect:/admin/user";
