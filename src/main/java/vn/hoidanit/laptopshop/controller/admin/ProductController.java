@@ -34,13 +34,13 @@ public class ProductController {
     public String getProduct(Model model) {
         List<Product> listProduct = productService.getAllProduct();
         model.addAttribute("listProduct", listProduct);
-        return "/admin/product/show";
+        return "admin/product/show";
     }
 
     @GetMapping("/admin/product/create")
     public String getProductCreate(Model model) {
         model.addAttribute("newProduct", new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping("/admin/product/create-product")
@@ -48,7 +48,7 @@ public class ProductController {
             BindingResult newBindingResult,
             @RequestParam("getImgFile") MultipartFile file) {
         if (newBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String avatar = this.uploadService.handleSaveUploadFile(file, "product");
         product.setImage(avatar);
@@ -64,7 +64,7 @@ public class ProductController {
         model.addAttribute("idPro", productUnwrap.getId());
         model.addAttribute("namePro", productUnwrap.getName());
         model.addAttribute("pricePro", productUnwrap.getPrice());
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/view-update/{id}")
@@ -72,7 +72,7 @@ public class ProductController {
         Optional<Product> getProduct = productService.findByIdProduct(id);
         Product productUnwrap = getProduct.get();
         model.addAttribute("updateProduct", productUnwrap);
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
@@ -81,7 +81,7 @@ public class ProductController {
             BindingResult updateProdBindingResult,
             @RequestParam("getImgFile") MultipartFile file) {
         if (updateProdBindingResult.hasErrors()) {
-            return "/admin/product/update";
+            return "admin/product/update";
         }
         String avatar = this.uploadService.handleSaveUploadFile(file, "product");
         Optional<Product> currentProduct = this.productService.findByIdProduct(product.getId());
@@ -108,7 +108,7 @@ public class ProductController {
         Product currentProductUnWrap = currentProduct.get();
         model.addAttribute("idProduct", currentProductUnWrap.getId());
         model.addAttribute("nameProduct", currentProductUnWrap.getName());
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @GetMapping("/admin/product/detele/{id}")

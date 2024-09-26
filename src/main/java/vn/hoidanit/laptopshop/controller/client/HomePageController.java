@@ -34,17 +34,17 @@ public class HomePageController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/home")
+    @GetMapping("")
     public String getHomePage(Model model) {
         List<Product> listProduct = this.productService.getAllProduct();
         model.addAttribute("listProduct", listProduct);
-        return "/client/homepage/show";
+        return "client/homepage/show";
     }
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerUser", new RegisterDTO());
-        return "/client/auth/register";
+        return "client/auth/register";
     }
 
     @PostMapping("/register")
@@ -52,7 +52,7 @@ public class HomePageController {
             @ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/client/auth/register";
+            return "client/auth/register";
         }
         User user = this.userService.registerDTOtoUser(registerDTO);
         String hashCode = this.passwordEncoder.encode(user.getPassword());
@@ -63,8 +63,12 @@ public class HomePageController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Model model) {
-        // model.addAttribute("registerUser", new RegisterDTO());
-        return "/client/auth/login";
+    public String getLoginPage() {
+        return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage() {
+        return "client/auth/deny";
     }
 }

@@ -20,7 +20,7 @@ public class ItemController {
     public String getDetailProduct(@PathVariable("id") Long id, Model model) {
         Product product = this.productService.findByIdProduct(id).get();
         model.addAttribute("product", product);
-        return "/client/product/detail";
+        return "client/product/detail";
     }
 
 }

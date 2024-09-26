@@ -27,18 +27,29 @@
                                                 <h3 class="text-center font-weight-light my-4">Login</h3>
                                             </div>
                                             <div class="card-body">
-                                                <form>
+                                                <form method="post" action="/login">
+                                                    <c:if test="${param.error != null}">
+                                                        <div class="my-2" style="color: red;">Invalid email or password.
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${param.logout != null}">
+                                                        <div class="my-2" style="color: seagreen;">Logout success.
+                                                        </div>
+                                                    </c:if>
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" id="inputEmail" type="email"
-                                                            placeholder="name@example.com" />
+                                                            placeholder="name@example.com" name="username" />
                                                         <label for="inputEmail">Email address</label>
                                                     </div>
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" id="inputPassword" type="password"
-                                                            placeholder="Password" />
+                                                            placeholder="Password" name="password" />
                                                         <label for="inputPassword">Password</label>
                                                     </div>
-
+                                                    <div>
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
+                                                    </div>
                                                     <div class="mt-4 mb-0">
                                                         <div class="d-grid">
                                                             <button type="submit" class="btn btn-primary">Login

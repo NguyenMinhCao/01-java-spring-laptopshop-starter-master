@@ -39,14 +39,14 @@ public class UserController {
     public String getHomePage(Model model) {
         List<User> arrUser = this.userService.getAllUser();
         model.addAttribute("listUser", arrUser);
-        return "/admin/user/show";
+        return "admin/user/show";
     }
 
     // user creation page form
     @GetMapping("/admin/user/create")
     public String getCreateUser(Model model) {
         model.addAttribute("newUser", new User());
-        return "/admin/user/create";
+        return "admin/user/create";
     }
 
     @PostMapping(value = "/admin/user/create-user")
@@ -61,7 +61,7 @@ public class UserController {
         }
         // validate
         if (newUserBindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashCode = this.passwordEncoder.encode(user.getPassword());
@@ -79,7 +79,7 @@ public class UserController {
         Optional<User> getUserOp = this.userService.findByIDUser(id);
         User getUser = getUserOp.get();
         model.addAttribute("idUser", getUser.getId());
-        return "/admin/user/delete";
+        return "admin/user/delete";
     }
 
     @GetMapping(value = "/admin/user/deteleId/{id}")
@@ -94,7 +94,7 @@ public class UserController {
         Optional<User> userOptional = this.userService.findByIDUser(id);
         User user = userOptional.get();
         model.addAttribute("updateUser", user);
-        return "/admin/user/update";
+        return "admin/user/update";
     }
 
     @PostMapping(value = "/admin/user/updateId")
@@ -127,7 +127,7 @@ public class UserController {
         model.addAttribute("userAddress", user.getAddress());
         model.addAttribute("userPhone", user.getPhone());
         model.addAttribute("userPass", user.getPassword());
-        return "/admin/user/detail";
+        return "admin/user/detail";
     }
 
 }

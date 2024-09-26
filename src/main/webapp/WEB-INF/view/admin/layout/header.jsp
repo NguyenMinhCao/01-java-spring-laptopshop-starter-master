@@ -18,7 +18,7 @@
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                    <!-- <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
@@ -26,8 +26,44 @@
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
-                    </ul>
+                        <li>
+                            <form action="/logout" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}"
+                                    value="${_csrf.token}" />
+                                <button class="dropdown-item" href="#">Logout</button>
+                            </form>
+                        </li>
+                    </ul> -->
+
+                    <c:if test="${not empty pageContext.request.userPrincipal}">
+                        <div class="dropdown my-auto">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end p-2" arialabelledby="dropdownMenuLink">
+                                <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
+                                    <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
+                                        src="/images/product/1711078092373-asus-01.png" />
+                                    <div class="text-center my-3">
+                                        <c:out value="${pageContext.request.userPrincipal.name}" />
+                                    </div>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>
+                                <li><a class="dropdown-item" href="#">Nhật ký họat động</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form action="/logout" method="post">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                        <button class="dropdown-item" href="#">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </c:if>
+                    <c:if test="${empty pageContext.request.userPrincipal}">
+                        <a href="/login">Đăng nhập</a>
+                    </c:if>
                 </li>
             </ul>
         </nav>
