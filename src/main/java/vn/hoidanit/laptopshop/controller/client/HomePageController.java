@@ -69,6 +69,7 @@ public class HomePageController {
 
     @GetMapping("/access-deny")
     public String getDenyPage() {
+        System.out.println("hiihi");
         return "client/auth/deny";
     }
 }
