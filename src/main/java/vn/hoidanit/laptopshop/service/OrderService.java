@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Order;
 import vn.hoidanit.laptopshop.domain.OrderDetail;
+import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.OrderDetailRepository;
 import vn.hoidanit.laptopshop.repository.OrderRepository;
 
@@ -32,6 +33,10 @@ public class OrderService {
         this.orderDetailRepository.delete(orderDetail);
     }
 
+    public List<OrderDetail> getAllOrder() {
+        return this.orderDetailRepository.findAll();
+    }
+
     public Order findOrderById(long id) {
         Optional<Order> orderOptional = this.orderRepository.findById(id);
         return orderOptional.get();
@@ -39,6 +44,10 @@ public class OrderService {
 
     public List<Order> getListOrder() {
         return this.orderRepository.findAll();
+    }
+
+    public List<Order> getListOrderByUser(User user) {
+        return this.orderRepository.getAllOrderByUser(user);
     }
 
     public List<OrderDetail> getLstOrderDetailByOrder(long id) {

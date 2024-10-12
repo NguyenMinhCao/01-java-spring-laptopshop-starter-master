@@ -9,14 +9,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import vn.hoidanit.laptopshop.domain.Order;
+import vn.hoidanit.laptopshop.domain.OrderDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
+import vn.hoidanit.laptopshop.service.OrderService;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -24,14 +29,17 @@ public class HomePageController {
 
     private final ProductService productService;
     private final UserService userService;
+    private final OrderService orderService;
     private PasswordEncoder passwordEncoder;
 
     public HomePageController(ProductService productService,
             UserService userService,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @GetMapping("")
@@ -69,7 +77,16 @@ public class HomePageController {
 
     @GetMapping("/access-deny")
     public String getDenyPage() {
-        System.out.println("hiihi");
         return "client/auth/deny";
+    }
+
+    @GetMapping("/history-order")
+    public String getAllOrder(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        User user = this.userService.getUserByEmail(email);
+        List<Order> lstOrder = this.orderService.getListOrderByUser(user);
+        model.addAttribute("lstOrder", lstOrder);
+        return "client/homepage/history";
     }
 }

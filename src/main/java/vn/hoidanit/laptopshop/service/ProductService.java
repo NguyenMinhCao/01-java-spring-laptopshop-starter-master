@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.tags.shaded.org.apache.regexp.recompile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -41,6 +43,10 @@ public class ProductService {
 
     public List<Product> getAllProduct() {
         return this.productRepository.findAll();
+    }
+
+    public Page<Product> getAllProductPage(Pageable page) {
+        return this.productRepository.findAll(page);
     }
 
     public Product handleSaveProduct(Product product) {
