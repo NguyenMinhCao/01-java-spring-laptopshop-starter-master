@@ -74,294 +74,78 @@
                                     </div>
                                 </div>
                                 <div class="tab-content">
-                                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                                        <div class="row g-4">
-                                            <div class="col-lg-12">
-                                                <div class="row g-4">
-                                                    <c:forEach items="${listProduct}" var="product">
-                                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                                            <div class="rounded position-relative fruite-item">
-                                                                <div class="fruite-img">
-                                                                    <img src="/images/product/${product.image}"
-                                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                                </div>
-                                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                                    style="top: 10px; left: 10px;">Laptop</div>
+                                    <div class="row g-4">
+                                        <div class="col-lg-12">
+                                            <div class="row g-4">
+                                                <c:forEach items="${listProducts}" var="product">
+                                                    <div class="col-md-6 col-lg-4 col-xl-3">
+                                                        <div class="rounded position-relative fruite-item product-card">
+                                                            <div class="fruite-img">
+                                                                <img src="/images/product/${product.image}"
+                                                                    class="img-fluid w-100 rounded-top" alt="">
+                                                            </div>
+                                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                                style="top: 10px; left: 10px;">
+                                                                Laptop
+                                                            </div>
+                                                            <div
+                                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                                <a href="/product/${product.id}">
+                                                                    <h4 style="font-size: 15px;">${product.name}
+                                                                    </h4>
+                                                                </a>
+                                                                <p style="font-size: 13px;">${product.shortDesc}</p>
                                                                 <div
-                                                                    class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                                    <a href="/product/${product.id}">
-                                                                        <h4 style="font: size 15px;">${product.name}
-                                                                        </h4>
-                                                                    </a>
-                                                                    <p style="font: size 13px;">${product.shortDesc}
+                                                                    class="d-flex flex-lg-wrap justify-content-center flex-column">
+                                                                    <p style="font-size: 15px; text-align: center; width: 100%;"
+                                                                        class="text-dark fw-bold mb-3">
+                                                                        <fmt:formatNumber type="number"
+                                                                            value="${product.price}" /> đ
                                                                     </p>
-                                                                    <div
-                                                                        class="d-flex  flex-lg-wrap justify-content-center">
-                                                                        <p style="font-size: 15px; text-align: center; width: 100%;"
-                                                                            class="text-dark  fw-bold mb-3">
-                                                                            <fmt:formatNumber type="number"
-                                                                                value="${product.price}" /> đ
-                                                                        </p>
-                                                                        <form action="add-product-to-cart/${product.id}"
-                                                                            method="post">
-                                                                            <input type="hidden"
-                                                                                name="${_csrf.parameterName}"
-                                                                                value="${_csrf.token}" />
-                                                                            <button
-                                                                                class="mx-auto btn border
-                                                                            border-secondary rounded-pill px-3
-                                                                            text-primary fa fa-shopping-bag me-2 text-primary">
-                                                                                Add to cart
-                                                                            </button>
-                                                                        </form>
-                                                                    </div>
+                                                                    <form action="add-product-to-cart/${product.id}"
+                                                                        method="post">
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
+                                                                            value="${_csrf.token}" />
+                                                                        <button
+                                                                            class="mx-auto btn border border-secondary rounded-pill px-3 text-primary fa fa-shopping-bag me-2 text-primary">
+                                                                            Add to cart
+                                                                        </button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </c:forEach>
-                                                </div>
+                                                    </div>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div id="tab-2" class="tab-pane fade show p-0">
-                                    <div class="row g-4">
-                                        <div class="col-lg-12">
-                                            <div class="row g-4">
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-5.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Grapes</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-2.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Raspberries</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="tab-3" class="tab-pane fade show p-0">
-                                    <div class="row g-4">
-                                        <div class="col-lg-12">
-                                            <div class="row g-4">
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-1.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Oranges</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-6.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Apple</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="tab-4" class="tab-pane fade show p-0">
-                                    <div class="row g-4">
-                                        <div class="col-lg-12">
-                                            <div class="row g-4">
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-5.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Grapes</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-4.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Apricots</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="tab-5" class="tab-pane fade show p-0">
-                                    <div class="row g-4">
-                                        <div class="col-lg-12">
-                                            <div class="row g-4">
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-3.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Banana</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-2.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Raspberries</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                                    <div class="rounded position-relative fruite-item">
-                                                        <div class="fruite-img">
-                                                            <img src="/client/img/fruite-item-1.jpg"
-                                                                class="img-fluid w-100 rounded-top" alt="">
-                                                        </div>
-                                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                            style="top: 10px; left: 10px;">Laptop</div>
-                                                        <div
-                                                            class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                            <h4>Oranges</h4>
-                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit
-                                                                sed do eiusmod te incididunt</p>
-                                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                    <nav aria-label="Page navigation example" class="pagination-nav">
+                                        <ul class="pagination justify-content-center" style="display: flex;">
+                                            <li class="${1 eq currentPage ? 'disabled page-item' : 'page-item'}">
+                                                <a class="page-link" href="/?page=${currentPage - 1}"
+                                                    aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                                                <li class="page-item">
+                                                    <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
+                                                        href="/?page=${loop.index + 1}">
+                                                        ${loop.index + 1}
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+                                            <li
+                                                class="${totalPages eq currentPage ? 'disabled page-item' : 'page-item'}">
+                                                <a class="page-link" href="/?page=${currentPage + 1}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>

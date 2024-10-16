@@ -7,16 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
-import vn.hoidanit.laptopshop.domain.Order;
-import vn.hoidanit.laptopshop.domain.OrderDetail;
 import vn.hoidanit.laptopshop.domain.Product;
-import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.domain.dto.CartDetailUpdateRequest;
+import vn.hoidanit.laptopshop.domain.dto.CartDetailUpdateRequestDTO;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UserService;
 
@@ -74,7 +70,7 @@ public class ItemController {
 
     // update quantity
     @PostMapping("/cart/update")
-    public ResponseEntity<?> updateCartDetailQuantity(@RequestBody CartDetailUpdateRequest request) {
+    public ResponseEntity<?> updateCartDetailQuantity(@RequestBody CartDetailUpdateRequestDTO request) {
         long cartDetailId = request.getCartDetailId();
         int quantity = request.getQuantity();
         try {

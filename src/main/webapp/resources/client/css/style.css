@@ -509,4 +509,50 @@
     line-height: 35px;
 }
 
+.product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card .p-4 {
+    flex-grow: 1;
+}
+
+.fruite-img img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.fruite-img img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card .p-4 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card .p-4 a {
+    flex-grow: 1;
+}
+
+.product-card .d-flex {
+    margin-top: auto;
+}
+
+.pagination-nav {
+    position: relative;
+    top: 73px;
+}
+
+
 /*** Footer End ***/
