@@ -57,6 +57,7 @@ public class ProductService {
                 && productCriteriaDTO.getPrice() == null) {
             return this.productRepository.findAll(page);
         }
+
         if (productCriteriaDTO.getFactory() != null && productCriteriaDTO.getFactory().isPresent()) {
             Specification<Product> currentsSpecs = ProductSpecs.matchListFactory(productCriteriaDTO.getFactory().get());
             combinedSpec = combinedSpec.and(currentsSpecs);
@@ -184,7 +185,7 @@ public class ProductService {
         List<CartDetail> listProductCart = null;
         if (user != null) {
             Cart cart = this.cartRepository.findByUser(user);
-            listProductCart = this.cartDetailRepository.getCartDetailUser(cart);
+            listProductCart = this.cartDetailRepository.findByCart(cart);
         }
         return listProductCart;
     }
@@ -220,7 +221,7 @@ public class ProductService {
         order.setTotalPrice(totalPrice);
         order.setStatus("PENDING");
         this.orderRepository.save(order);
-        handleSaveOrderDetail(email, order);
+        this.handleSaveOrderDetail(email, order);
         session.setAttribute("sum", 0);
     }
 
@@ -236,7 +237,7 @@ public class ProductService {
             orderDetail.setQuantity(cartDetail.getQuantity());
             this.orderDetailRepository.save(orderDetail);
         }
-        deteleCart(email);
+        this.deteleCart(email);
     }
 
     public void deteleCart(String email) {

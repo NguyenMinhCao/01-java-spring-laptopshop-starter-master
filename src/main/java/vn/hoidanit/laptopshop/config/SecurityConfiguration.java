@@ -62,7 +62,7 @@ public class SecurityConfiguration {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD,
                                 DispatcherType.INCLUDE)
                         .permitAll()
-                        .requestMatchers("/", "/login", "/product/**", "/client/**", "/css/**",
+                        .requestMatchers("/", "/login", "/register", "/product/**", "/client/**", "/css/**",
                                 "/js/**", "/images/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -82,17 +82,4 @@ public class SecurityConfiguration {
                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
         return http.build();
     }
-
-    // @Bean
-    // public AuthenticationManager authenticationManager(HttpSecurity http,
-    // PasswordEncoder passwordEncoder,
-    // UserDetailsService userDetailsService) throws Exception {
-    // AuthenticationManagerBuilder authenticationManagerBuilder = http
-    // .getSharedObject(AuthenticationManagerBuilder.class);
-    // authenticationManagerBuilder
-    // .userDetailsService(userDetailsService)
-    // .passwordEncoder(passwordEncoder);
-    // return authenticationManagerBuilder.build();
-    // }
-
 }
