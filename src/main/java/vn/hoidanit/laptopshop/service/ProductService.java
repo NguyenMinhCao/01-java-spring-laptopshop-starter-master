@@ -53,6 +53,7 @@ public class ProductService {
 
     public Page<Product> getAllProductPageSpec(Pageable page, ProductCriteriaDTO productCriteriaDTO) {
         Specification<Product> combinedSpec = Specification.where(null);
+
         if (productCriteriaDTO.getFactory() == null && productCriteriaDTO.getTarget() == null
                 && productCriteriaDTO.getPrice() == null) {
             return this.productRepository.findAll(page);
